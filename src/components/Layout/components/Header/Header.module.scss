@@ -12,6 +12,7 @@
 }
 
 .inner {
+    padding: 0 var(--default-layout-horizontal-spacer);
     height: 100%;
     width: var(--default-layout-width);
     display: flex;
@@ -101,4 +102,5 @@
     margin-left: 16px;
     background-color: transparent;
     padding: 0 4px;
+    cursor: pointer;
 }
