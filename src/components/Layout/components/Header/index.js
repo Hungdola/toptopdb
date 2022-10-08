@@ -1,16 +1,24 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import Tippy from '@tippyjs/react/headless';
+import Tippy from '@tippyjs/react';
+import HeadlessTippy from '@tippyjs/react/headless';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleQuestion,
     faCircleXmark,
     faEarthAsia,
+    faCloudArrowUp,
     faEllipsisVertical,
     faKeyboard,
     faMagnifyingGlass,
     faSpinner,
+    faUser,
+    faCoins,
+    faGear,
+    faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
+// import { faMessage } from '@fortawesome/free-regular-svg-icons';
+import 'tippy.js/dist/tippy.css'; //dùng để css lại cái tippy
 
 import Button from '@/components/Button';
 import { Wrapper as PopperWrapper } from '@/components/Popper';
@@ -57,6 +65,8 @@ const MENU_ITEMS = [
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
 
+    const currentUser = true;
+
     useEffect(() => {
         setTimeout(() => {
             setSearchResult([]);
@@ -65,8 +75,38 @@ function Header() {
 
     //handle logic
     const handleMenuChange = (menuItem) => {
-        console.log(menuItem);
+        switch (menuItem.type) {
+            case 'language':
+                //handle change language
+                break;
+            default:
+        }
     };
+
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>,
+            title: 'View profile',
+            to: './@hung',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins}></FontAwesomeIcon>,
+            title: 'Get coins',
+            to: './coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear}></FontAwesomeIcon>,
+            title: 'Settings',
+            to: './settings',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut}></FontAwesomeIcon>,
+            title: 'Log out',
+            to: './logout',
+            separate: true, //thằng nào có cái này sẽ css để nó có vạch
+        },
+    ];
 
     return (
         <header className={cx('wrapper')}>
@@ -74,7 +114,7 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="logo tiktok"></img>
                 </div>
-                <Tippy
+                <HeadlessTippy
                     interactive
                     visible={searchResult.length > 0}
                     render={(attrs) => (
@@ -100,15 +140,35 @@ function Header() {
                             <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
                         </button>
                     </div>
-                </Tippy>
-                <div className={cx('action')}>
-                    <Button text>Upload</Button>
-                    <Button primary>Log in</Button>
+                </HeadlessTippy>
 
-                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
-                        </button>
+                <div className={cx('action')}>
+                    {currentUser ? (
+                        <>
+                            <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faCloudArrowUp}></FontAwesomeIcon>
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button text>Upload</Button>
+                            <Button primary>Log in</Button>
+                        </>
+                    )}
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <img
+                                className={cx('user-avatar')}
+                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/920551b9fdaa6a620f2aef13f8d15c74~c5_720x720.jpeg?x-expires=1665421200&x-signature=INaxpYPPM7eGIq7Lvd%2Fn6BHLohE%3D"
+                                alt="Trần Mạnh Hùng"
+                            ></img>
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>
