@@ -7,7 +7,6 @@ import {
     faCircleQuestion,
     faCircleXmark,
     faEarthAsia,
-    faCloudArrowUp,
     faEllipsisVertical,
     faKeyboard,
     faMagnifyingGlass,
@@ -26,6 +25,8 @@ import styles from './Header.module.scss';
 import images from '@/assets/images';
 import AccountItem from '@/components/AccountItem';
 import Menu from '@/components/Popper/Menu';
+import { UploadIcon } from '@/components/Icons';
+import Image from '@/components/Image';
 
 const cx = classNames.bind(styles); //bind sẽ giúp các bạn bind cái obj style này vào
 //rồi nó sẽ trả ra 1 method là 1  function class cx
@@ -147,7 +148,9 @@ function Header() {
                         <>
                             <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudArrowUp}></FontAwesomeIcon>
+                                    <UploadIcon></UploadIcon>
+                                    {/* <MessageIcon></MessageIcon>
+                                    <MailBoxIcon></MailBoxIcon> */}
                                 </button>
                             </Tippy>
                         </>
@@ -159,11 +162,12 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/920551b9fdaa6a620f2aef13f8d15c74~c5_720x720.jpeg?x-expires=1665421200&x-signature=INaxpYPPM7eGIq7Lvd%2Fn6BHLohE%3D"
+                                src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/920551b9fdaa6a620f2aef13f8d15c74~c5_720x720.jpeg?x-expires=1665594000&x-signature=7p423HTxU8rDHeZKmZlz6kpG%2Fww%3D"
                                 alt="Trần Mạnh Hùng"
-                            ></img>
+                                fallback="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/289226999_1079573635970313_6742039973895950200_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=GIlp7OsNSzwAX8zIxNt&_nc_ht=scontent.fsgn2-8.fna&oh=00_AT_BohgqBeyeFL5TuScfrEZ5AVvNxbxoFtPGHEnYbrOVhQ&oe=6348C7F6"
+                            ></Image>
                         ) : (
                             <button className={cx('more-btn')}>
                                 <FontAwesomeIcon icon={faEllipsisVertical}></FontAwesomeIcon>
