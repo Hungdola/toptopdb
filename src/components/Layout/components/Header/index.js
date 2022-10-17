@@ -13,7 +13,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 // import { faMessage } from '@fortawesome/free-regular-svg-icons';
 import 'tippy.js/dist/tippy.css'; //dùng để css lại cái tippy
+import { Link } from 'react-router-dom';
 
+import routesConfig from '@/config/routes';
 import Button from '@/components/Button';
 import styles from './Header.module.scss';
 import images from '@/assets/images';
@@ -98,9 +100,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to={routesConfig.home} className={cx('logo-link')}>
                     <img src={images.logo} alt="logo tiktok"></img>
-                </div>
+                </Link>
 
                 <Search></Search>
 
@@ -136,7 +138,6 @@ function Header() {
                                 className={cx('user-avatar')}
                                 src="https://p16-sign-va.tiktokcdn.com/tos-useast2a-avt-0068-giso/920551b9fdaa6a620f2aef13f8d15c74~c5_720x720.jpeg?x-expires=1666116000&x-signature=s18wkHyAaVcCMYqOJW%2BsPs7kTIM%3D"
                                 alt="Trần Mạnh Hùng"
-                                fallback="https://scontent.fsgn2-8.fna.fbcdn.net/v/t39.30808-6/289226999_1079573635970313_6742039973895950200_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=GIlp7OsNSzwAX8zIxNt&_nc_ht=scontent.fsgn2-8.fna&oh=00_AT_BohgqBeyeFL5TuScfrEZ5AVvNxbxoFtPGHEnYbrOVhQ&oe=6348C7F6"
                             ></Image>
                         ) : (
                             <button className={cx('more-btn')}>

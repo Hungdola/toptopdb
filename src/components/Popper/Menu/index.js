@@ -10,7 +10,7 @@ const cx = classNames.bind(styles);
 
 const defaultFn = () => {}; //để phòng trường hợp nếu không có onChange bên ngoài thì ở cpn Menu này sẽ không bị lỗi
 
-function Menu({ children, items = [], onChange = defaultFn }) {
+function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1]; //lấy phần tử cuối
 
@@ -38,6 +38,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
             interactive
             delay={[0, 700]}
             offset={[12, 8]}
+            hideOnClick={hideOnClick}
             placement="bottom-end"
             render={(attrs) => (
                 <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
