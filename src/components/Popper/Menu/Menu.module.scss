@@ -11,6 +11,11 @@
     padding-bottom: 8px;
 }
 
+.menu-body {
+    overflow-y: auto;
+}
+
+//menu item
 .menu-item {
     width: 100%;
     justify-content: flex-start;
@@ -32,6 +37,7 @@
     position: relative;
     height: 50px;
     margin-top: -8px;
+    flex-shrink: 0; //giúp nó không bị co lại so với những cái khác
 }
 .back-btn {
     width: 50px;

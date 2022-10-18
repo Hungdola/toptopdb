@@ -60,48 +60,51 @@ function Search() {
     };
 
     return (
-        <HeadlessTippy
-            interactive
-            visible={showResult && searchResult.length > 0}
-            render={(attrs) => (
-                <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper>
-                        <h4 className={cx('search-title')}>Accounts</h4>
-                        {searchResult.map((result) => (
-                            <AccountItem key={result.id} data={result}></AccountItem>
-                        ))}
-                    </PopperWrapper>
-                </div>
-            )}
-            onClickOutside={handleHideResult}
-        >
-            <div className={cx('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search accounts and videos"
-                    spellCheck={false}
-                    onChange={handleChange}
-                    onFocus={() => setShowResult(true)}
-                ></input>
-                {!!searchValue &&
-                    !loading && ( //converse searchValue sang kiểu boolean khi có searchValue thì nó mới hiển thị button clear
-                        <button className={cx('clear')} onClick={handleClear}>
-                            <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
-                        </button>
-                    )}
-                {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>}
+        //fix warning tippy
+        <div>
+            <HeadlessTippy
+                interactive
+                visible={showResult && searchResult.length > 0}
+                render={(attrs) => (
+                    <div className={cx('search-result')} tabIndex="-1" {...attrs}>
+                        <PopperWrapper>
+                            <h4 className={cx('search-title')}>Accounts</h4>
+                            {searchResult.map((result) => (
+                                <AccountItem key={result.id} data={result}></AccountItem>
+                            ))}
+                        </PopperWrapper>
+                    </div>
+                )}
+                onClickOutside={handleHideResult}
+            >
+                <div className={cx('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search accounts and videos"
+                        spellCheck={false}
+                        onChange={handleChange}
+                        onFocus={() => setShowResult(true)}
+                    ></input>
+                    {!!searchValue &&
+                        !loading && ( //converse searchValue sang kiểu boolean khi có searchValue thì nó mới hiển thị button clear
+                            <button className={cx('clear')} onClick={handleClear}>
+                                <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
+                            </button>
+                        )}
+                    {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>}
 
-                <button
-                    className={cx('search-btn')}
-                    onMouseDown={(e) => {
-                        e.preventDefault();
-                    }}
-                >
-                    <SearchIcon></SearchIcon>
-                </button>
-            </div>
-        </HeadlessTippy>
+                    <button
+                        className={cx('search-btn')}
+                        onMouseDown={(e) => {
+                            e.preventDefault();
+                        }}
+                    >
+                        <SearchIcon></SearchIcon>
+                    </button>
+                </div>
+            </HeadlessTippy>
+        </div>
     );
 }
 
